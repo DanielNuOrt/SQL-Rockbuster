@@ -1,0 +1,20 @@
+--This QUERY will display the inaccuracies regarding film rental duration.
+Essential finding to fix and achieve more accurate results.
+
+
+SELECT
+  B.film_id,
+  D.title,
+  A.rental_date,
+  A.return_date,
+-- Calculating rental duration from the timestamps
+  A.return_date - A.rental_date AS timestamps_rental_duration,
+-- v rental_duration recorded in the Data set
+  D.rental_duration AS reg_rental_duration
+FROM rental A
+  INNER JOIN inventory B ON A.inventory_id = B.inventory_id
+  INNER JOIN store C ON B.store_id = C.store_id
+  INNER JOIN film D ON B.film_id = D.film_id
+  GROUP BY B.film_id, A.rental_id, B.inventory_id, C.store_id, D.title, D.rental_rate, D.rental_duration
+  ORDER BY rental_id ASC
+LIMIT 10
