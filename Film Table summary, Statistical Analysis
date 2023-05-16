@@ -1,0 +1,30 @@
+***This Query uses the INNER JOIN function to retrieve Data from diverse tables 
+and nested functions EXTRACT() and EPOCH FROM() to retrieve time data and turn it into a more readable form.***
+
+SELECT D.rating,
+COUNT(A.rental_id) AS num_of_transactions,
+COUNT(DISTINCT B.film_id) AS num_films,
+-- Calculating rental duration
+MIN(A.return_date - A.rental_date) AS min_rental_duration,
+MAX(A.return_date - A.rental_date) AS max_rental_duration,
+-- Rental duration Days, format: Numeric with decimals. 1 day = 86400 seconds
+AVG(EXTRACT(EPOCH FROM (A.return_date - A.rental_date)) / 86400) AS avg_rental_duration_days_numeric,
+MIN(EXTRACT(EPOCH FROM (A.return_date - A.rental_date)) / 86400) AS min_rental_duration_days_numeric,
+MAX(EXTRACT(EPOCH FROM (A.return_date - A.rental_date)) / 86400) AS max_rental_duration_days_numeric,
+SUM(EXTRACT(EPOCH FROM (A.return_date - A.rental_date)) / 86400) AS sum_rental_duration_days_numeric,
+-- Using extract to calc and retrieve the revenue
+AVG(EXTRACT(EPOCH FROM (A.return_date - A.rental_date)) / 86400 * D.rental_rate) AS avg_film_revenue,
+MIN(EXTRACT(EPOCH FROM (A.return_date - A.rental_date)) / 86400 * D.rental_rate) AS min_film_revenue,
+MAX(EXTRACT(EPOCH FROM (A.return_date - A.rental_date)) / 86400 * D.rental_rate) AS max_film_revenue,
+SUM(EXTRACT(EPOCH FROM (A.return_date - A.rental_date)) / 86400 * D.rental_rate) AS total_revenue,
+COUNT(DISTINCT D.rental_rate) AS num_of_rates,
+AVG(D.rental_rate) AS avg_rate,
+MIN(D.rental_rate) AS min_rate,
+MAX(D.rental_rate) AS max_rate,
+MODE()
+WITHIN GROUP(ORDER BY D.rental_rate) AS mode_rate
+FROM rental A
+INNER JOIN inventory B ON A.inventory_id = B.inventory_id
+INNER JOIN store C ON B.store_id = C.store_id
+INNER JOIN film D ON B.film_id = D.film_id
+GROUP BY D.rating
