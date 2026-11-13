@@ -1,27 +1,44 @@
-# ***Rockbuster Stealth Data Analysis Project***
----
-## **Introduction**
----
-Rockbuster Stealth LLC is a movie rental company that used to have stores around the world.
-Facing stiff competition from streaming services such as Netflix and Amazon Prime,
-the Rockbuster Stealth management team is planning to use its existing movie licenses to
-launch an online video rental service in order to stay competitive.
+# Rockbuster Stealth — PostgreSQL analysis
 
----
-## Key Questions and Objectives
----
+A SQL analysis project based on the fictional Rockbuster Stealth movie-rental business scenario. The exercise explores rental activity, revenue and customer geography to support decisions around a proposed online rental service.
 
-The **Rockbuster Stealth Management Board** has asked a series of business questions and
-they expect data-driven answers that they can use for their next company strategy. Here are
-the main questions they’d like to answer:
+## Business questions
 
-          * Which movies contributed the most/least to revenue gain?
-          * What was the average rental duration for all videos?
-          * Which countries are Rockbuster customers based in?
-          * Where are customers with a high lifetime value based?
-          * Do sales figures vary between geographic regions?
----
-## Data Set
----
-    * [Rockbuster data set]([url](http://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip))
-    * PostgreSQL
+The original brief asks questions including:
+
+- Which films contribute most and least to revenue?
+- What is the average rental duration?
+- Where are customers located?
+- Where are customers with higher lifetime value based?
+- Do sales vary across geographic regions?
+
+## Work represented in this repository
+
+The current repository contains:
+
+- SQL query files covering rental summaries, rental duration and revenue calculations, including aggregation by film rating.
+- A review of inconsistencies identified in the rental table.
+- An Excel analysis workbook.
+- The Rockbuster data dictionary in PDF format.
+
+The query files currently have descriptive filenames without `.sql` extensions. The repository also includes the analysis workbook and data dictionary; the source database itself is not bundled here.
+
+## Tools and techniques
+
+- PostgreSQL
+- SQL joins and aggregations
+- Date/time interval analysis with `EXTRACT(EPOCH FROM ...)`
+- Descriptive statistics and revenue summaries
+- Data-quality review
+
+## Presentation
+
+[Rockbuster Stealth — Tableau story](https://public.tableau.com/app/profile/daniel7968/viz/RockbusterStealthLLCProject/Story1)
+
+## Dataset
+
+The project uses the sample DVD rental database distributed for PostgreSQL learning and analysis. The scenario is fictional and should not be interpreted as commercial work for a real rental company.
+
+## Project context
+
+This is an earlier analytical portfolio project. It demonstrates foundational SQL and business-analysis work; it is not intended to represent the scope of my more recent data engineering projects.
